@@ -1,4 +1,4 @@
-pageflex_product_report
+pageflex_reports
 =======================
 
 Generate a CSV of products from an XML dump of a Pageflex Storefront 8 database
