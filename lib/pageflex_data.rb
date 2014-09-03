@@ -30,7 +30,7 @@ class PageflexData
     tables = {}
     table_names.each { |e| tables[e.to_sym] = [] }
     File.open(xml_file_name) do |f|
-      f.lazy.each.with_index do |line, i|
+      f.lazy.each do |line|
         type = table_names.find { |e| line.include? e }
         tables[type.to_sym] << line if type
       end
