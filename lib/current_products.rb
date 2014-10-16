@@ -12,7 +12,10 @@ class CurrentProducts < Hash
 
   def load_current_products(pf_products, pf_cat_entries)
     pf_products.each do |p|
+      # Add if there is a category entry for the product
       self[p[0]] = p[1] if pf_cat_entries.key? p[0]
+      # Don't add if the product is marked as deleted
+      delete p[0] if p[1][:b_IsDeleted] == 'True'
     end
   end
 
@@ -22,10 +25,17 @@ class CurrentProducts < Hash
     end
   end
 
+  # Iterate over the list of category entries and attach the categories to each
+  # product on self.
   def attach_categories(pf_cat_entries, categories)
-    pf_cat_entries.each do |e|
-      e[1].each_with_index do |c, i|
-        self[e[0]]["Category#{i}".to_sym] = categories[c.to_sym][:Path]
+    pf_cat_entries.each do |product_entries|
+      # Skip unless the product is found in self
+      next unless self[product_entries]
+
+      product_entries[1].each_with_index do |category, i|
+        # self = { product_id: { Category0: 'foo', Category1: 'bar' } } etc
+        self[product_entries[0]]["Category#{i}".to_sym] =
+          categories[category.to_sym][:Path]
       end
     end
   end

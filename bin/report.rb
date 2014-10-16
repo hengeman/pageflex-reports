@@ -17,7 +17,6 @@ columns = [
   ['File Name', :assets_ShortName__STR],
   ['Retired?', :b_IsRetired],
   ['Archived?', :b_IsArchived],
-  ['Deleted?', :b_IsDeleted],
   ['Category 0', :Category0],
   ['Category 1', :Category1],
   ['Category 2', :Category2],
