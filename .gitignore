@@ -1,4 +1,6 @@
 *.xml
+*.xml#
 *.csv
+*.csv#
 *.xls
 misc/
